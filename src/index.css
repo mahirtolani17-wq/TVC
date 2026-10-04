@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Archivo", sans-serif;
+  --font-sans: "DM Sans", sans-serif;
+  --font-accent: "Instrument Serif", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-brand-black: #0F0F0E;
+  --color-brand-grey: #2B2B2A;
+  --color-brand-bone: #E9E5DD;
+  --color-brand-brass: #B58F57;
+  --color-brand-copper: #A8582F;
+}
+
+/* Global Reset & Base Customizations */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-brand-black);
+  color: var(--color-brand-bone);
+  overflow-x: hidden;
+}
+
+/* Hard edges, 1px lines, flat aesthetic */
+hr, .border-thin {
+  border-color: rgba(233, 229, 221, 0.15);
+}
+
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-grey);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-brass);
+}
+
+/* Motion Rules */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-heading .reveal-line,
+  .reveal-photo,
+  .reveal-photo .reveal-img,
+  .reveal-fade-up {
+    transform: none !important;
+    opacity: 1 !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Line-by-line mask reveal for headings */
+  .reveal-heading .reveal-line-container {
+    overflow: hidden;
+    display: block;
+  }
+  
+  .reveal-heading .reveal-line {
+    display: inline-block;
+    transform: translateY(110%);
+    transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.1, 1);
+  }
+  
+  .reveal-heading.is-visible .reveal-line {
+    transform: translateY(0);
+  }
+  
+  /* Stagger lines in headings */
+  .reveal-heading.is-visible .reveal-line-0 { transition-delay: 0ms; }
+  .reveal-heading.is-visible .reveal-line-1 { transition-delay: 80ms; }
+  .reveal-heading.is-visible .reveal-line-2 { transition-delay: 160ms; }
+
+  /* Photos: clip-path inset wipe + scale zoom */
+  .reveal-photo {
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 1.2s cubic-bezier(0.2, 0.7, 0.1, 1);
+  }
+  
+  .reveal-photo .reveal-img {
+    transform: scale(1.15);
+    transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.1, 1);
+  }
+  
+  .reveal-photo.is-visible {
+    clip-path: inset(0% 0 0 0);
+  }
+  
+  .reveal-photo.is-visible .reveal-img {
+    transform: scale(1);
+  }
+
+  /* Body text, cards, rows, buttons: fade + translateY(30px) */
+  .reveal-fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.1, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.1, 1);
+  }
+  
+  .reveal-fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Container-based staggered reveal */
+  .stagger-container.is-visible .reveal-fade-up:nth-child(1) { transition-delay: 40ms; }
+  .stagger-container.is-visible .reveal-fade-up:nth-child(2) { transition-delay: 120ms; }
+  .stagger-container.is-visible .reveal-fade-up:nth-child(3) { transition-delay: 200ms; }
+  .stagger-container.is-visible .reveal-fade-up:nth-child(4) { transition-delay: 280ms; }
+  .stagger-container.is-visible .reveal-fade-up:nth-child(5) { transition-delay: 360ms; }
+  .stagger-container.is-visible .reveal-fade-up:nth-child(6) { transition-delay: 440ms; }
+}

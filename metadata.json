@@ -1,0 +1,6 @@
+{
+  "name": "TVC the Salon",
+  "description": "Premium hair salon in Bhat, Ahmedabad featuring precision haircuts, balayage, and luxury hair care.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
